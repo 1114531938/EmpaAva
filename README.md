@@ -27,13 +27,9 @@ Expected media paths:
 
 ```text
 static/images/teaser.png
-static/images/workflow.png
 static/images/avatar_gallery.png
-static/images/interface_walkthrough.png
 static/images/case_study.png
 static/videos/demo_booth.mp4
-static/videos/demo_case1.mp4
-static/videos/demo_case2.mp4
 ```
 
 ## Local Preview

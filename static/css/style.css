@@ -198,10 +198,6 @@ h3 {
   padding: 0 18px 18px;
 }
 
-.stacked-media {
-  margin-top: 22px;
-}
-
 .pipeline-grid,
 .video-grid {
   display: grid;
@@ -218,8 +214,7 @@ h3 {
   background: var(--surface);
 }
 
-.pipeline-grid p,
-.feature-list p {
+.pipeline-grid p {
   margin: 0;
 }
 
@@ -234,20 +229,6 @@ h3 {
   color: var(--accent-dark);
   font-weight: 800;
   font-size: 0.85rem;
-}
-
-.feature-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-top: 18px;
-}
-
-.feature-list p {
-  padding: 18px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
 }
 
 .video-grid {
@@ -297,7 +278,6 @@ pre {
   }
 
   .pipeline-grid,
-  .feature-list,
   .video-grid {
     grid-template-columns: 1fr;
   }
