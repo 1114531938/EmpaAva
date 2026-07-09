@@ -5,31 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="EmpaAva: An Embodied Empathetic 3D Avatar System for video-call-like human-avatar interaction."
+      content="EmpaAva: an open-source, agentic 3D-avatar empathetic live chatbot for video-call-like human-avatar interaction."
     />
-    <title>EmpaAva: An Embodied Empathetic 3D Avatar System</title>
+    <title>EmpaAva: An Open-source Agentic 3D-Avatar Empathetic Live Chatbot</title>
     <link rel="stylesheet" href="static/css/style.css" />
   </head>
   <body>
     <header class="hero">
       <div class="container hero-inner">
         <p class="venue">Paper Project Page</p>
-        <h1>EmpaAva: An Embodied Empathetic 3D Avatar System</h1>
+        <h1>EmpaAva: An Open-source Agentic 3D-Avatar Empathetic Live Chatbot</h1>
         <p class="subtitle">
-          A video-call-like embodied dialogue system that perceives emotion,
-          plans empathetic responses, synthesizes expressive speech, generates
-          lip-synchronized facial motion, and renders photorealistic 3D avatars.
+          An open-source embodied empathetic chatbot that carries empathetic
+          response generation from text-only exchanges into live, face-to-face
+          interaction with photorealistic 3D avatars.
         </p>
 
         <div class="authors" aria-label="Authors and affiliations">
           <p>
-            <a href="#">Author One</a><sup>1</sup>,
-            <a href="#">Author Two</a><sup>1</sup>,
-            <a href="#">Author Three</a><sup>2</sup>
+            <a href="mailto:e1554543@u.nus.edu">Jie Yang</a><sup>1</sup>,
+            <a href="#">Wenhao Xu</a><sup>1</sup>,
+            <a href="#">Shuhui Lin</a><sup>2</sup>,
+            <a href="mailto:haofei7419@gmail.com">Hao Fei</a><sup>3</sup>
           </p>
           <p class="affiliations">
-            <sup>1</sup>Affiliation One &nbsp;&nbsp;
-            <sup>2</sup>Affiliation Two
+            <sup>1</sup>National University of Singapore &nbsp;&nbsp;
+            <sup>2</sup>Tsinghua University &nbsp;&nbsp;
+            <sup>3</sup>University of Oxford
+          </p>
+          <p class="affiliations">
+            e1554543@u.nus.edu &nbsp;&nbsp; haofei7419@gmail.com
           </p>
         </div>
 
@@ -51,8 +56,9 @@
               alt="EmpaAva teaser showing a user talking with an embodied 3D avatar in a video-call-like booth."
             />
             <figcaption>
-              EmpaAva connects speech and camera input to empathetic dialogue,
-              affective voice generation, facial motion, and 3D avatar rendering.
+              In a video-call-like booth, the user speaks to a 3D digital human
+              that senses emotion and replies face to face with emotional speech,
+              lip-synced facial motion, and photorealistic 3D-avatar rendering.
             </figcaption>
           </figure>
         </div>
@@ -62,21 +68,20 @@
         <div class="container narrow">
           <h2>Abstract</h2>
           <p>
-            EmpaAva is an embodied empathetic 3D avatar system designed for
-            real-time, video-call-like interaction between users and digital
-            humans. Given microphone and optional camera input, the system
-            performs speech transcription and emotion perception, constructs an
-            empathy-aware dialogue state, plans an appropriate response, and
-            synthesizes expressive speech for a selected avatar persona. The
-            generated speech is further converted into lip-synchronized facial
-            motion and rendered as a photorealistic 3D avatar response.
+            This paper presents EmpaAva, to our knowledge the first open-source,
+            agentic 3D-avatar empathetic chatbot, which carries empathetic
+            response generation from text-only exchanges into live, face-to-face
+            interaction. Through a video-call-like interface, a user speaks to a
+            3D digital human that reads their affect from speech and optional
+            vision, and replies with emotional speech, lip-synced facial motion,
+            and photorealistic 3D Gaussian avatar rendering.
           </p>
           <p>
-            The project targets EMNLP/ACL-style demo scenarios where language,
-            affect, speech, and embodied rendering are presented as a complete
-            interactive pipeline. The interface supports avatar selection,
-            background selection, conversation history, generated video
-            playback, and inspection of intermediate runtime artifacts.
+            At its core, an LLM coordinates a Tri-Agent Architecture in which
+            perception, empathetic response planning, and embodied rendering form
+            a closed loop. A Response Planning layer compiles each LLM reply into
+            an executable multimodal plan, aligning voice, expression, rendering,
+            and avatar behavior with one empathetic intent.
           </p>
         </div>
       </section>
@@ -101,42 +106,60 @@
           <h2>Method Overview</h2>
           <figure class="media-card">
             <img
-              src="static/images/workflow.png"
-              alt="EmpaAva workflow from user audio and video input to perception, dialogue planning, speech synthesis, facial motion, rendering, and playback."
+              src="static/images/method_architecture.png"
+              alt="Tri-Agent architecture of EmpaAva with PerceptionAgent, ResponseAgent, RenderAgent, and embodied empathetic response generation."
             />
+            <figcaption>
+              The Tri-Agent architecture: PerceptionAgent understands the user,
+              ResponseAgent plans an empathetic reply, and RenderAgent turns the
+              plan into an embodied 3D-avatar video.
+            </figcaption>
+          </figure>
+          <figure class="media-card stacked-media">
+            <img
+              src="static/images/workflow.png"
+              alt="Workflow of the EmpaAva system from entry and avatar setup to video-call interaction, avatar response, 3D viewing, and history export."
+            />
+            <figcaption>
+              EmpaAva runs as a browser-based video-call booth: the user enters,
+              selects an avatar, provides audio/video input, receives the avatar
+              response, inspects the 3D avatar, and reviews or exports history.
+            </figcaption>
           </figure>
           <div class="pipeline-grid">
             <article>
               <span class="step">01</span>
               <h3>Multimodal Perception</h3>
               <p>
-                The booth records speech and optional camera input, then
-                extracts ASR results and acoustic emotion cues for the user turn.
+                PerceptionAgent converts raw audio-visual input into a structured
+                percept with transcript, speech emotion, optional visual cues,
+                dialogue history, and input metadata.
               </p>
             </article>
             <article>
               <span class="step">02</span>
               <h3>Empathetic Reply Planning</h3>
               <p>
-                A dialogue agent converts perception outputs into an
-                empathy-aware response plan with text, style, avatar, and voice
-                metadata.
+                ResponseAgent reasons over the user state and emits a structured
+                reply plan that specifies the text, emotion and tone, avatar,
+                voice, background, and supporting evidence.
               </p>
             </article>
             <article>
               <span class="step">03</span>
               <h3>Affective Speech and Motion</h3>
               <p>
-                The response is synthesized as expressive speech and converted
-                into lip-synchronized facial motion parameters.
+                RenderAgent synthesizes emotional speech and predicts frame-level
+                FLAME parameters for jaw, lips, head pose, and expression.
               </p>
             </article>
             <article>
               <span class="step">04</span>
               <h3>3D Avatar Rendering</h3>
               <p>
-                The motion is merged with avatar-specific assets and rendered as
-                a photorealistic digital human response for browser playback.
+                A FLAME-to-Gaussian transfer applies motion to a rigged 3D
+                Gaussian avatar and renders the response in a realistic call
+                scene.
               </p>
             </article>
           </div>
@@ -152,8 +175,8 @@
               alt="Gallery of qualitative avatar renderings generated by EmpaAva."
             />
             <figcaption>
-              Qualitative examples of avatar responses under different
-              conversation contexts, backgrounds, voices, and emotional styles.
+              Qualitative avatar renderings across different identities,
+              covering female and male digital humans with diverse appearances.
             </figcaption>
           </figure>
         </div>
@@ -169,9 +192,9 @@
             />
           </figure>
           <div class="feature-list">
-            <p><strong>Booth interaction:</strong> camera and microphone capture in a video-call-like layout.</p>
-            <p><strong>Avatar controls:</strong> digital human, voice speaker, and background selection.</p>
-            <p><strong>Runtime inspection:</strong> playback, conversation history, recordings, and generated artifacts.</p>
+            <p><strong>Entry:</strong> visitors can join as guests, set a nickname, and choose a digital avatar with voice and background.</p>
+            <p><strong>Talking:</strong> microphone and optional camera stay on while voice activity detection segments each utterance automatically.</p>
+            <p><strong>Responding:</strong> the backend reads affect, plans an empathetic reply, and returns synchronized emotional speech and 3D avatar video.</p>
           </div>
         </div>
       </section>
@@ -185,6 +208,11 @@
               alt="Case study showing a user emotion, an empathetic response plan, generated speech, facial motion, and final avatar video."
             />
           </figure>
+          <p class="caption">
+            Multi-turn examples show EmpaAva tracking academic stress,
+            self-doubt, interpersonal conflict, and emotional invalidation while
+            grounding each response in emotion, cause, and strategy.
+          </p>
           <div class="video-grid">
             <div class="video-card">
               <video controls playsinline poster="static/images/case_study.png">
@@ -207,9 +235,9 @@
       <section class="section" id="bibtex">
         <div class="container narrow">
           <h2>BibTeX</h2>
-          <pre><code>@misc{empaava2026,
-  title        = {EmpaAva: An Embodied Empathetic 3D Avatar System},
-  author       = {Author One and Author Two and Author Three},
+<pre><code>@misc{empaava2026,
+  title        = {EmpaAva: An Open-source Agentic 3D-Avatar Empathetic Live Chatbot},
+  author       = {Yang, Jie and Xu, Wenhao and Lin, Shuhui and Fei, Hao},
   year         = {2026},
   howpublished = {\url{https://1114531938.github.io/EmpaAva/}}
 }</code></pre>

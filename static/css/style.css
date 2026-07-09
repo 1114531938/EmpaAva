@@ -198,6 +198,10 @@ h3 {
   padding: 0 18px 18px;
 }
 
+.stacked-media {
+  margin-top: 22px;
+}
+
 .pipeline-grid,
 .video-grid {
   display: grid;

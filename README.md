@@ -2,7 +2,7 @@
 
 This repository contains the GitHub Pages project homepage for:
 
-**EmpaAva: An Embodied Empathetic 3D Avatar System**
+**EmpaAva: An Open-source Agentic 3D-Avatar Empathetic Live Chatbot**
 
 The page is a static academic project site for an EMNLP/ACL-style demo paper. It
 does not run an online inference backend and does not require a database or
