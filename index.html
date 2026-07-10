@@ -89,11 +89,16 @@
       <section class="section" id="video">
         <div class="container">
           <h2>Video Demo</h2>
-          <figure class="media-card">
-            <img
-              src="static/images/video_demo.jpeg"
-              alt="EmpaAva booth UI screenshot used as the video demo preview."
-            />
+          <figure class="video-card">
+            <video
+              controls
+              preload="metadata"
+              poster="static/images/video_demo.jpeg"
+              aria-label="EmpaAva booth video demonstration"
+            >
+              <source src="static/videos/demo_booth.mp4" type="video/mp4" />
+              Your browser does not support HTML5 video.
+            </video>
           </figure>
           <p class="caption">
             Demonstration of a user speaking with EmpaAva through the booth UI.
