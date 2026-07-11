@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EmpaAva</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css?v=empaava-avatar-cutout-20260709-01" />
+  </head>
+  <body>
+    <div id="app">
+      <main class="page login-page">
+        <div class="cosmos-scene" aria-hidden="true">
+          <div class="starfield"></div>
+          <div class="orbit orbit-wide"></div>
+          <div class="orbit orbit-mid"></div>
+          <div class="orbit orbit-tight"></div>
+          <span class="planet planet-aurora" data-rx="390" data-ry="92" data-speed="0.00018" data-phase="2.65"></span>
+          <span class="planet planet-coral" data-rx="300" data-ry="68" data-speed="-0.00024" data-phase="2.2"></span>
+          <span class="planet planet-ice" data-rx="210" data-ry="46" data-speed="0.00032" data-phase="5.05"></span>
+        </div>
+        <section class="login-shell">
+          <div class="brand-stage">
+            <div class="booth-visual" aria-hidden="true"></div>
+            <div class="brand-copy">
+              <h1 class="brand-title">EmpaAva</h1>
+              <p class="brand-subtitle">An Empathetic 3D Avatar Conversation Booth</p>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script>
+      window.addEventListener("error", function (event) {
+        var app = document.getElementById("app");
+        if (!app) return;
+        app.innerHTML =
+          '<main class="page login-page"><section class="login-shell"><form class="auth-card">' +
+          "<h2>Interface failed to load</h2>" +
+          '<p class="error">' +
+          String(event.message || "Unknown browser error").replace(/[&<>"']/g, function (char) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char];
+          }) +
+          "</p></form></section></main>";
+      });
+      window.addEventListener("unhandledrejection", function (event) {
+        var app = document.getElementById("app");
+        if (!app) return;
+        var reason = event.reason && event.reason.message ? event.reason.message : event.reason;
+        app.innerHTML =
+          '<main class="page login-page"><section class="login-shell"><form class="auth-card">' +
+          "<h2>Interface failed to load</h2>" +
+          '<p class="error">' +
+          String(reason || "Unknown browser error").replace(/[&<>"']/g, function (char) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" }[char];
+          }) +
+          "</p></form></section></main>";
+      });
+    </script>
+    <script type="module" src="./app.js?v=public-demo-exact-20260711-01"></script>
+  </body>
+</html>
