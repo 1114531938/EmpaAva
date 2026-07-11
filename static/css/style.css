@@ -163,13 +163,20 @@ h3 {
   color: #fff;
 }
 
+.demo-page { min-height: 100vh; background: #0d1626; }
+.demo-page .demo-section { padding-top: 42px; }
+.demo-nav { border-bottom: 1px solid #26364e; background: #0a1220; }
+.demo-nav .container { display: flex; align-items: center; justify-content: space-between; min-height: 64px; gap: 16px; }
+.demo-nav a { color: #b8c9df; font-weight: 650; }
+.demo-nav strong { display: inline-flex; align-items: center; gap: 9px; color: #fff; }
+
 .demo-heading {
   max-width: 720px;
   margin: 0 auto 28px;
   text-align: center;
 }
 
-.demo-heading h2 { margin-bottom: 10px; }
+.demo-heading h1 { margin-bottom: 10px; font-size: clamp(2rem, 5vw, 3.25rem); }
 .demo-heading p { margin: 0; color: #aebbd0; }
 .demo-heading .eyebrow { color: #63b3ff; font-size: .8rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 
