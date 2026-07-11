@@ -278,7 +278,17 @@ button {
 }
 
 .booth-visual {
-  display: none;
+  position: absolute;
+  z-index: 1;
+  right: clamp(2%, 9vw, 13%);
+  bottom: 0;
+  display: block;
+  width: min(36vw, 520px);
+  height: min(76vh, 760px);
+  background: url("./digital_human_images/306_cutout_v8.png") center bottom / contain no-repeat;
+  filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.38));
+  opacity: 0.92;
+  pointer-events: none;
 }
 
 .brand-copy {
@@ -289,6 +299,7 @@ button {
   gap: 20px;
   justify-items: center;
   padding: 32px 0 72px;
+  transform: translateX(clamp(-150px, -8vw, -36px));
 }
 
 @media (max-width: 760px) {
@@ -305,6 +316,9 @@ button {
     width: 36px;
     height: 36px;
   }
+
+  .brand-copy { transform: none; padding-top: 0; }
+  .booth-visual { right: -8%; opacity: 0.42; }
 }
 
 @media (prefers-reduced-motion: reduce) {

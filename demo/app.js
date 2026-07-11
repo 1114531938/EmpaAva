@@ -274,13 +274,18 @@ async function hydrateSession() {
 
 async function apiFetch(path, options = {}) {
   if (PUBLIC_DEMO_MODE) {
-    if (path === "/api/digital_humans") return { digitalHumans: avatars.map((item) => ({ avatar_id: item.avatarId, tts_speaker_id: item.ttsSpeakerId, name: item.name, role: item.role, color: item.color, image_url: item.imageUrl })) };
+    if (path === "/api/digital_humans") return { digitalHumans: avatars.map((item) => ({ id: item.id, avatarId: item.avatarId, ttsSpeakerId: item.ttsSpeakerId, name: item.name, role: item.role, speakerLabel: item.speakerLabel, color: item.color, imageUrl: item.imageUrl, backgroundUrl: item.backgroundUrl || "" })) };
     if (path === "/api/backgrounds") return { backgrounds: [
       { id: "study", label: "Study", image_url: "./digital_human_backgrounds/study_db692a17.png" },
       { id: "bedroom", label: "Bedroom", image_url: "" },
       { id: "sofa", label: "Sofa", image_url: "" }
     ] };
     if (path.startsWith("/api/conversations")) return { conversations: getGuestConversations() };
+    if (path.startsWith("/api/tts_preview")) {
+      const speakerId = new URL(path, location.href).searchParams.get("speakerId") || "6224";
+      const supported = ["6224", "1801", "3553", "6346"].includes(speakerId) ? speakerId : "6224";
+      return { audioUrl: `./voice_previews/${supported}.wav`, speakerId: supported };
+    }
     if (path === "/api/auth/me") throw new Error("Public demo guest mode");
     throw new Error("This action requires the local EmpaAva backend on port 7862.");
   }
@@ -2503,7 +2508,7 @@ async function sendTalk() {
       id: `public-demo-${Date.now()}`,
       avatarId: currentAvatarId,
       runId: `public-demo-${Date.now()}`,
-      videoUrl: "./demo_booth.mp4",
+      videoUrl: `./avatar_replies/${["306", "2001", "2002", "2003"].includes(String(currentAvatarId)) ? currentAvatarId : "306"}.mp4`,
       replyText: "I hear how much you are carrying right now. You do not have to solve everything at once; let us take the next small step together.",
       subtitleText: "I hear how much you are carrying right now. You do not have to solve everything at once; let us take the next small step together.",
       createdAt: new Date().toISOString(),
