@@ -41,13 +41,61 @@
         <nav class="button-row" aria-label="Project links">
           <a class="button disabled" href="#" aria-disabled="true" title="Coming soon">Paper</a>
           <a class="button" href="https://github.com/1114531938/EmpaAva_System">Code</a>
-          <a class="button disabled" href="#" aria-disabled="true" title="Coming soon">Demo</a>
+          <a class="button" href="#interactive-demo">Try Demo</a>
           <a class="button disabled" href="#" aria-disabled="true" title="Coming soon">Dataset</a>
         </nav>
       </div>
     </header>
 
     <main>
+      <section class="section demo-section" id="interactive-demo">
+        <div class="container">
+          <div class="demo-heading">
+            <p class="eyebrow">Interactive preview</p>
+            <h2>Talk with EmpaAva</h2>
+            <p>
+              Try a guided empathetic conversation in your browser. This public
+              project-page demo uses curated responses and a pre-rendered avatar
+              clip; it does not run the full GPU inference pipeline.
+            </p>
+          </div>
+
+          <div class="demo-shell">
+            <div class="demo-avatar" aria-label="EmpaAva response video">
+              <video id="demo-avatar-video" controls playsinline preload="metadata" poster="static/images/video_demo.jpeg">
+                <source src="static/videos/demo_booth.mp4" type="video/mp4" />
+              </video>
+              <div class="demo-avatar-meta">
+                <span class="live-dot" aria-hidden="true"></span>
+                <div><strong>EmpaAva</strong><small>Curated interactive preview</small></div>
+              </div>
+            </div>
+
+            <div class="demo-chat">
+              <div id="demo-messages" class="demo-messages" aria-live="polite">
+                <div class="message assistant">
+                  <span>EmpaAva</span>
+                  <p>Hi, I’m here with you. Choose a situation below or tell me what is on your mind.</p>
+                </div>
+              </div>
+
+              <div class="demo-suggestions" aria-label="Suggested messages">
+                <button type="button" data-demo-prompt="I feel overwhelmed by my deadlines.">Deadline stress</button>
+                <button type="button" data-demo-prompt="I keep doubting whether I am good enough.">Self-doubt</button>
+                <button type="button" data-demo-prompt="I had an argument with someone close to me.">Relationship conflict</button>
+              </div>
+
+              <form id="demo-form" class="demo-form">
+                <label class="sr-only" for="demo-input">Message EmpaAva</label>
+                <input id="demo-input" maxlength="280" autocomplete="off" placeholder="Share how you are feeling…" />
+                <button type="submit">Send</button>
+              </form>
+              <p class="demo-notice">No text is uploaded or stored. For research demonstration only—not medical advice or crisis support.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="section teaser-section">
         <div class="container">
           <figure class="media-card">
