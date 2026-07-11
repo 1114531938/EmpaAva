@@ -278,17 +278,7 @@ button {
 }
 
 .booth-visual {
-  position: absolute;
-  z-index: 1;
-  right: -4%;
-  bottom: -2%;
-  display: block;
-  width: min(68vw, 920px);
-  height: min(96vh, 940px);
-  background: url("./digital_human_images/306_cutout_v8.png") center bottom / contain no-repeat;
-  filter: drop-shadow(0 22px 38px rgba(0, 0, 0, 0.38));
-  opacity: 1;
-  pointer-events: none;
+  display: none;
 }
 
 .brand-copy {
@@ -299,10 +289,6 @@ button {
   gap: 20px;
   justify-items: center;
   padding: 32px 0 72px;
-  width: min(560px, 52vw);
-  justify-self: start;
-  margin-left: clamp(18px, 3vw, 52px);
-  transform: translateX(clamp(-70px, -3vw, -22px));
 }
 
 @media (max-width: 760px) {
@@ -320,8 +306,7 @@ button {
     height: 36px;
   }
 
-  .brand-copy { transform: none; padding-top: 0; }
-  .booth-visual { right: -8%; opacity: 0.42; }
+  .brand-copy { padding-top: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
