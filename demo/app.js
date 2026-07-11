@@ -536,7 +536,6 @@ function renderLogin() {
       <button class="login-corner-btn" type="button" id="cornerLoginBtn">Log In</button>
       <section class="login-shell">
         <div class="brand-stage">
-          <div class="booth-visual" aria-hidden="true"></div>
           <div class="brand-copy">
             <h1 class="brand-title">EmpaAva</h1>
             <p class="brand-subtitle">An Empathetic 3D Avatar Conversation Booth</p>
@@ -3896,7 +3895,6 @@ function renderPreCallSetup() {
     <main class="page login-page">
       <section class="login-shell">
         <div class="brand-stage">
-          <div class="booth-visual" aria-hidden="true"></div>
           <div class="brand-copy">
             <h1 class="brand-title">Choose Digital Human</h1>
             <p class="brand-subtitle">Hi, ${escapeHtml(session.username)}. Select a digital human to start the call.</p>
