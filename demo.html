@@ -1,70 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Interactive EmpaAva project demo." />
-    <title>EmpaAva Demo</title>
-    <link rel="stylesheet" href="static/css/style.css" />
-  </head>
-  <body class="demo-page">
-    <header class="demo-nav">
-      <div class="container">
-        <a href="index.html" aria-label="Back to EmpaAva project page">← Project Page</a>
-        <strong><span class="live-dot" aria-hidden="true"></span> EmpaAva Demo</strong>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="EmpaAva interactive booth preview." />
+  <title>EmpaAva Demo</title>
+  <link rel="stylesheet" href="static/css/style.css" />
+</head>
+<body class="booth-page">
+  <div class="booth-app">
+    <header class="booth-topbar">
+      <a href="index.html" class="booth-back">← Project Page</a>
+      <a class="booth-brand" href="demo.html"><i></i> EmpaAva</a>
+      <div class="booth-top-actions">
+        <button id="history-button" type="button">History <span id="history-count">0</span></button>
         <a href="https://github.com/1114531938/EmpaAva_System">Code</a>
       </div>
     </header>
 
-    <main>
-      <section class="section demo-section" id="interactive-demo">
-        <div class="container">
-          <div class="demo-heading">
-            <p class="eyebrow">Interactive preview</p>
-            <h1>Talk with EmpaAva</h1>
-            <p>
-              Try a guided empathetic conversation in your browser. This public
-              demo uses curated responses and a pre-rendered avatar clip; it does
-              not run the full GPU inference pipeline.
-            </p>
-          </div>
+    <main class="booth-main">
+      <section id="welcome-screen" class="booth-welcome">
+        <div class="booth-orbits" aria-hidden="true"><i></i><i></i><i></i></div>
+        <p class="booth-kicker">EMPATHETIC 3D AVATAR CONVERSATION BOOTH</p>
+        <h1>EmpaAva</h1>
+        <p>Speak face to face with an empathetic digital human.</p>
+        <button id="start-button" class="booth-primary" type="button">START</button>
+        <small>Public preview · No account required</small>
+      </section>
 
-          <div class="demo-shell">
-            <div class="demo-avatar" aria-label="EmpaAva response video">
-              <video id="demo-avatar-video" controls playsinline preload="metadata" poster="static/images/video_demo.jpeg">
-                <source src="static/videos/demo_booth.mp4" type="video/mp4" />
-              </video>
-              <div class="demo-avatar-meta">
-                <span class="live-dot" aria-hidden="true"></span>
-                <div><strong>EmpaAva</strong><small>Curated interactive preview</small></div>
-              </div>
-            </div>
-
-            <div class="demo-chat">
-              <div id="demo-messages" class="demo-messages" aria-live="polite">
-                <div class="message assistant">
-                  <span>EmpaAva</span>
-                  <p>Hi, I’m here with you. Choose a situation below or tell me what is on your mind.</p>
-                </div>
-              </div>
-
-              <div class="demo-suggestions" aria-label="Suggested messages">
-                <button type="button" data-demo-prompt="I feel overwhelmed by my deadlines.">Deadline stress</button>
-                <button type="button" data-demo-prompt="I keep doubting whether I am good enough.">Self-doubt</button>
-                <button type="button" data-demo-prompt="I had an argument with someone close to me.">Relationship conflict</button>
-              </div>
-
-              <form id="demo-form" class="demo-form">
-                <label class="sr-only" for="demo-input">Message EmpaAva</label>
-                <input id="demo-input" maxlength="280" autocomplete="off" placeholder="Share how you are feeling…" />
-                <button type="submit">Send</button>
-              </form>
-              <p class="demo-notice">No text is uploaded or stored. For research demonstration only—not medical advice or crisis support.</p>
-            </div>
-          </div>
+      <section id="setup-screen" class="booth-setup" hidden>
+        <div class="setup-copy">
+          <span>STEP 1 OF 2</span><h1>Choose your digital human</h1>
+          <p>Select a companion and conversation setting before entering the booth.</p>
         </div>
+        <div class="avatar-options" role="radiogroup" aria-label="Digital human">
+          <button class="avatar-option active" data-avatar="Evan Hart" data-color="#36d5b4" type="button"><b>EH</b><strong>Evan Hart</strong><small>Calm &amp; supportive</small></button>
+          <button class="avatar-option" data-avatar="Maya Chen" data-color="#7ca7ff" type="button"><b>MC</b><strong>Maya Chen</strong><small>Warm &amp; reflective</small></button>
+          <button class="avatar-option" data-avatar="Alex Morgan" data-color="#ff9c75" type="button"><b>AM</b><strong>Alex Morgan</strong><small>Grounded &amp; encouraging</small></button>
+        </div>
+        <label class="setup-field">Conversation setting
+          <select id="setting-select"><option>Quiet studio</option><option>Warm study</option><option>Evening lounge</option></select>
+        </label>
+        <div class="setup-actions"><button id="setup-back" type="button">Back</button><button id="enter-booth" class="booth-primary" type="button">Enter booth</button></div>
+      </section>
+
+      <section id="room-screen" class="booth-room" hidden>
+        <div class="room-status"><span><i></i> Demo session</span><strong id="session-timer">00:00</strong><span>Static preview</span></div>
+        <div class="call-grid">
+          <article class="call-panel user-panel">
+            <div class="panel-label">You</div>
+            <video id="camera-video" autoplay muted playsinline hidden></video>
+            <div id="camera-empty" class="camera-empty"><div>◎</div><strong>Camera preview</strong><span>Turn on your camera for a booth-like experience</span></div>
+          </article>
+          <article class="call-panel avatar-panel">
+            <div class="panel-label" id="avatar-label">Evan Hart</div>
+            <video id="avatar-video" playsinline preload="metadata" poster="static/images/video_demo.jpeg"><source src="static/videos/demo_booth.mp4" type="video/mp4" /></video>
+            <div class="avatar-state"><i></i><span id="avatar-state-text">Digital human online</span></div>
+            <div id="reply-caption" class="reply-caption" hidden></div>
+          </article>
+        </div>
+
+        <div class="conversation-bar">
+          <div id="conversation-log" class="conversation-log" aria-live="polite"><p><b>EmpaAva</b> Hi, I’m here with you. You can type or record a short message.</p></div>
+          <div class="prompt-row"><button data-prompt="I feel overwhelmed by my deadlines." type="button">Deadline stress</button><button data-prompt="I keep doubting whether I am good enough." type="button">Self-doubt</button><button data-prompt="I had an argument with someone close to me." type="button">Relationship conflict</button></div>
+          <form id="message-form" class="room-composer"><input id="message-input" maxlength="280" placeholder="Share how you are feeling…" autocomplete="off" /><button type="submit">Send</button></form>
+        </div>
+
+        <div class="call-controls">
+          <button id="camera-button" type="button"><span>▣</span>Camera</button>
+          <button id="record-button" class="record-control" type="button"><span>●</span><em>Record</em></button>
+          <button id="restart-button" type="button"><span>↻</span>Restart</button>
+          <button id="export-button" type="button"><span>⇩</span>Export</button>
+        </div>
+        <p class="booth-disclaimer">Browser-only curated preview. Camera and microphone remain on this device. Full ASR, emotional TTS, facial motion and Gaussian rendering require the local CUDA system.</p>
       </section>
     </main>
-    <script src="static/js/main.js"></script>
-  </body>
+
+    <aside id="history-drawer" class="history-drawer" aria-hidden="true">
+      <div><h2>Conversation history</h2><button id="history-close" type="button">×</button></div>
+      <div id="history-list" class="history-list"></div>
+      <button id="history-clear" class="history-clear" type="button">Clear history</button>
+    </aside>
+    <div id="drawer-scrim" class="drawer-scrim" hidden></div>
+    <div id="toast" class="booth-toast" role="status" hidden></div>
+  </div>
+  <script src="static/js/demo.js"></script>
+</body>
 </html>
